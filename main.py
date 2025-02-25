@@ -32,6 +32,8 @@ class MyPlugin(BasePlugin):
         #     # 阻止该事件默认行为（向接口获取回复）
         #     ctx.prevent_default()
         self.ap.logger.debug(f"{ctx.event.sender_id}")
+        self.ap.logger.debug(f"{ctx.prevent_default()}")
+
         ctx.host.send_active_message(adapter=ctx.prevent_default()[0],
                                      target_id=msg,
                                      target_type='person',
