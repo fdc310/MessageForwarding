@@ -41,7 +41,7 @@ class MyPlugin(BasePlugin):
         la_type = ctx.event.launcher_type
 
 
-        await ctx.host.sendactive_message(adapter=ctx.host.get_platform_adapters()[1],
+        await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
                                 target_id='wxid_xd12odto989122',
                                target_type=ctx.event.launcher_type,
                                message=platform_types.MessageChain([
