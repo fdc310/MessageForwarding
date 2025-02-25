@@ -36,8 +36,8 @@ class MyPlugin(BasePlugin):
         # self.ap.logger.debug(f"{ctx.prevent_default()}")
         # print(type(msg))
         # msg = str(msg)
-
-        await ctx.host.send_active_message(adapter='aiocqhttp',
+        print(ctx.host.get_platform_adapters())
+        await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[0],
                                      target_id=msg,
                                      target_type='person',
                                      message=platform_types.MessageChain([
