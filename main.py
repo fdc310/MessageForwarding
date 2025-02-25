@@ -39,11 +39,11 @@ class MyPlugin(BasePlugin):
         print(ctx.host.get_platform_adapters())
         print(ctx.event.launcher_type)
         la_type = ctx.event.launcher_type
-        if True:
 
-            # await ctx.send_message(target_id=msg,
-            #                        target_type=ctx.event.launcher_type)
-            await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
+
+        # await ctx.send_message(target_id=msg,
+        #                        target_type=ctx.event.launcher_type)
+        await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
                                          target_id='wxid_xd12odto989122',
                                          target_type='person',
                                          message=platform_types.MessageChain([
