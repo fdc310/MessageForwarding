@@ -40,13 +40,13 @@ class MyPlugin(BasePlugin):
         print(ctx.event.launcher_type)
         la_type = ctx.event.launcher_type
         if la_type == ctx.host.get_platform_adapters()[1]:
-        await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
-                                     target_id=msg,
-                                     target_type='person',
-                                     message=platform_types.MessageChain([
-                                         platform_types.Plain("hello, word")]
-                                     )
-                                     )
+            await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
+                                         target_id=msg,
+                                         target_type='person',
+                                         message=platform_types.MessageChain([
+                                             platform_types.Plain("hello, word")]
+                                         )
+                                         )
         ctx.prevent_default()
 
     # 当收到群消息时触发
