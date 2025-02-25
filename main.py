@@ -39,12 +39,15 @@ class MyPlugin(BasePlugin):
         print(ctx.host.get_platform_adapters())
         print(ctx.event.launcher_type)
         la_type = ctx.event.launcher_type
-        if la_type == ctx.host.get_platform_adapters()[1]:
+        if True:
+
+            # await ctx.send_message(target_id=msg,
+            #                        target_type=ctx.event.launcher_type)
             await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
-                                         target_id=msg,
+                                         target_id='wxid_xd12odto989122',
                                          target_type='person',
                                          message=platform_types.MessageChain([
-                                             platform_types.Plain("hello, word")]
+                                             platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
                                          )
                                          )
         ctx.prevent_default()
