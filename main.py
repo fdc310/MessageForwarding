@@ -3,7 +3,7 @@ from pkg.plugin.events import *  # 导入事件类
 import pkg.platform.types as platform_types
 
 # 注册插件
-@register(name="Hello", description="hello world", version="0.1", author="RockChinQ")
+@register(name="MessageForwarding", description="Message forwarding", version="0.1", author="阿东不懂事")
 class MyPlugin(BasePlugin):
 
     # 插件加载时触发
@@ -31,10 +31,11 @@ class MyPlugin(BasePlugin):
         #
         #     # 阻止该事件默认行为（向接口获取回复）
         #     ctx.prevent_default()
-        self.ap.logger.debug(f"{ctx.event.sender_id}")
-        self.ap.logger.debug(f"{ctx.prevent_default()}")
+        self.ap.logger.debug("hello, {}".format(ctx.event.sender_id))
+        # self.ap.logger.debug(f"{ctx.event.sender_id}")
+        # self.ap.logger.debug(f"{ctx.prevent_default()}")
 
-        ctx.host.send_active_message(adapter=ctx.prevent_default()[0],
+        ctx.host.send_active_message(adapter='aiocqhttp',
                                      target_id=msg,
                                      target_type='person',
                                      message=platform_types.MessageChain(
