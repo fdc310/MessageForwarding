@@ -40,9 +40,9 @@ class MyPlugin(BasePlugin):
         ctx.host.send_active_message(adapter='aiocqhttp',
                                      target_id=msg,
                                      target_type='person',
-                                     message=platform_types.MessageChain(
-                                         [platform_types.Plain(f"你好，{msg}")]
-                                     ))
+                                     message=platform_types.MessageChain([
+                                         platform_types.Plain("hello, word")
+                                     ]))
         ctx.prevent_default()
 
     # 当收到群消息时触发
