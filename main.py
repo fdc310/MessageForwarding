@@ -34,14 +34,14 @@ class MyPlugin(BasePlugin):
         self.ap.logger.debug("hello, {}".format(ctx.event.sender_id))
         # self.ap.logger.debug(f"{ctx.event.sender_id}")
         # self.ap.logger.debug(f"{ctx.prevent_default()}")
-        print(type(msg))
-        msg = str(msg)
+        # print(type(msg))
+        # msg = str(msg)
 
-        ctx.host.send_active_message(adapter='aiocqhttp',
+        await ctx.host.send_active_message(adapter='aiocqhttp',
                                      target_id=msg,
                                      target_type='person',
-                                     message=platform_types.MessageChain(
-                                         platform_types.Plain("hello, word")
+                                     message=platform_types.MessageChain([
+                                         platform_types.Plain("hello, word")]
                                      )
                                      )
         ctx.prevent_default()
