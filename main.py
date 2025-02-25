@@ -34,6 +34,8 @@ class MyPlugin(BasePlugin):
         self.ap.logger.debug("hello, {}".format(ctx.event.sender_id))
         # self.ap.logger.debug(f"{ctx.event.sender_id}")
         # self.ap.logger.debug(f"{ctx.prevent_default()}")
+        print(type(msg))
+        msg = str(msg)
 
         ctx.host.send_active_message(adapter='aiocqhttp',
                                      target_id=msg,
