@@ -42,22 +42,19 @@ class MyPlugin(BasePlugin):
         la_type = ctx.event.launcher_type
 
         if msg != '[图片]':
-            if msg.strip('.')[-1] in ['jpg', 'png'] and msg.strip("://")[0] in ["http", "https"]:
-                req = requests.get(msg)
-                try:
-                    if req.status_code == 200:
-                        await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
-                                                           target_id='wxid_xd12odto989122',
-                                                           target_type='person',
-                                                           message=platform_types.MessageChain(
-                                                               [
-                                                                   platform_types.Image(
-                                                                       url=msg)
-                                                               ]
-                                                           )
-                                                           )
-                except Exception as E:
-                    return E
+            if msg.split('.')[-1] in ['jpg', 'png'] and msg.split("://")[0] in ["http", "https"]:
+                
+                await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
+                                                   target_id='wxid_xd12odto989122',
+                                                   target_type='person',
+                                                   message=platform_types.MessageChain(
+                                                       [
+                                                           platform_types.Image(
+                                                               url=msg)
+                                                       ]
+                                                   )
+                                                   )
+
 
             await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
                             target_id='wxid_xd12odto989122',
