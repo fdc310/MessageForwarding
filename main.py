@@ -26,9 +26,10 @@ class MyPlugin(BasePlugin):
                 await self.host.send_active_message(
                     adapter=self.host.get_platform_adapters()[0],
                     target_type="person",
-                    target_id="1010553892",
+                    target_id="wxid_xd12odto989122",
                     message=platform_types.MessageChain([
-                        platform_types.Plain("hello, world!")
+                        platform_message.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
+
                     ])
                 )
             except Exception as e:
