@@ -50,8 +50,9 @@ class MyPlugin(BasePlugin):
 
         if msg != '[图片]':
             if msg.split('.')[-1] in ['jpg', 'png'] and msg.split("://")[0] in ["http", "https"]:
+                # ctx.add_return('send_message',)
 
-                ctx.send_message(
+                await ctx.send_message(
                                                    target_id='wxid_xd12odto989122',
                                                    target_type='person',
                                                    message=platform_message.MessageChain(
@@ -63,7 +64,7 @@ class MyPlugin(BasePlugin):
                                                 )
 
 
-            ctx.send_message(
+            await ctx.send_message(
                             target_id='wxid_xd12odto989122',
                            target_type='person',
                            message=platform_message.MessageChain([
@@ -74,7 +75,7 @@ class MyPlugin(BasePlugin):
 
         else:
 
-            ctx.send_message(target_id='wxid_xd12odto989122',
+            await ctx.send_message(target_id='wxid_xd12odto989122',
                                                    target_type='person',
                                                    message=platform_message.MessageChain(
                                                        [
@@ -83,7 +84,7 @@ class MyPlugin(BasePlugin):
                                                    )
                                                    )
 
-        ctx.send_message(
+        await ctx.send_message(
                                          target_id='898246617',
                                          target_type='person',
                                          message=platform_message.MessageChain([
