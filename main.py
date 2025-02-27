@@ -37,16 +37,16 @@ class MyPlugin(BasePlugin):
         print(ctx.host.get_platform_adapters())
         print(ctx.event.launcher_type)
         la_type = ctx.event.launcher_type
-        await  ctx.host.send_active_message(
-            adapter=ctx.host.get_platform_adapters()[1],
-            target_id='wxid_xd12odto989122',
-            target_type='person',
-            message=platform_message.MessageChain(
-                [
-                platform_message.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
-                        ]
-                                            )
-        )
+        # await  ctx.host.send_active_message(
+        #     adapter=ctx.host.get_platform_adapters()[1],
+        #     target_id='wxid_xd12odto989122',
+        #     target_type='person',
+        #     message=platform_message.MessageChain(
+        #         [
+        #         platform_message.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
+        #                 ]
+        #                                     )
+        # )
 
         # if msg != '[图片]':
         #     if msg.split('.')[-1] in ['jpg', 'png'] and msg.split("://")[0] in ["http", "https"]:
@@ -91,13 +91,13 @@ class MyPlugin(BasePlugin):
         #                                      platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
         #                                  )
         #                                  )
-        # await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
-        #                                    target_id='wxid_xd12odto989122',
-        #                                    target_type='person',
-        #                                    message=platform_types.MessageChain([
-        #                                        platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
-        #                                    )
-        #                                    )
+        await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
+                                           target_id='wxid_xd12odto989122',
+                                           target_type='person',
+                                           message=platform_message.MessageChain([
+                                               platform_message.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
+                                           )
+                                           )
         ctx.prevent_postorder()
 
     # 当收到群消息时触发
