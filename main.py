@@ -1,6 +1,9 @@
+# import traceback
+
 from pkg.plugin.context import register, handler, llm_func, BasePlugin, APIHost, EventContext
 from pkg.plugin.events import *  # 导入事件类
-
+import asyncio
+import pkg.platform.types as platform_types
 
 
 # 注册插件
@@ -13,7 +16,26 @@ class MyPlugin(BasePlugin):
 
     # 异步初始化
     async def initialize(self):
-        pass
+        print(self.host.get_platform_adapters())
+
+        async def send_message():
+            print("send message start waiting")
+            await asyncio.sleep(30)
+
+            try:
+                await self.host.send_active_message(
+                    adapter=self.host.get_platform_adapters()[0],
+                    target_type="person",
+                    target_id="1010553892",
+                    message=platform_types.MessageChain([
+                        platform_types.Plain("hello, world!")
+                    ])
+                )
+            except Exception as e:
+                return e
+            print("send message end")
+
+        asyncio.get_running_loop().create_task(send_message())
 
     # 当收到个人消息时触发
     @handler(PersonNormalMessageReceived)
@@ -37,78 +59,8 @@ class MyPlugin(BasePlugin):
         print(ctx.host.get_platform_adapters())
         print(ctx.event.launcher_type)
         la_type = ctx.event.launcher_type
-        # await  ctx.host.send_active_message(
-        #     adapter=ctx.host.get_platform_adapters()[1],
-        #     target_id='wxid_xd12odto989122',
-        #     target_type='person',
-        #     message=platform_message.MessageChain(
-        #         [
-        #         platform_message.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
-        #                 ]
-        #                                     )
-        # )
+        ctx.add_return("reply", ["hello, everyone!"])
 
-        if msg != '[图片]':
-            if msg.split('.')[-1] in ['jpg', 'png'] and msg.split("://")[0] in ["http", "https"]:
-                ctx.add_return('send_message', ['wxid_xd12odto989122', 'person',
-                                                platform_message.Image(
-                                                    url=msg)
-                                                ])
-
-                # await ctx.send_message(
-                #                                    target_id='wxid_xd12odto989122',
-                #                                    target_type='person',
-                #                                    message=platform_message.MessageChain(
-                #                                        [
-                #                                            platform_message.Image(
-                #                                                url=msg)
-                #                                        ]
-                #                                    )
-                #                                 )
-
-            ctx.add_return('send_message', ['wxid_xd12odto989122', 'person',
-                                            platform_message.Plain(
-                                                f"你有新的消息来自{ctx.event.sender_id},他说{msg}")
-
-            ])
-
-
-        else:
-
-            ctx.add_return('send_message', ['wxid_xd12odto989122', 'person',
-                                            platform_message.Image(
-                                                url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
-
-                                            ])
-
-            # await ctx.send_message(target_id='wxid_xd12odto989122',
-            #                                        target_type='person',
-            #                                        message=platform_message.MessageChain(
-            #                                            [
-            #                         platform_message.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
-            #                                            ]
-            #                                        )
-            #                                        )
-
-        ctx.add_return('send_message', ['wxid_xd12odto989122', 'person',
-                                        platform_message.Plain(
-                                            f"你有新的消息来自{ctx.event.sender_id},他说{msg}")
-
-        ])
-        # await ctx.send_message(
-        #                                  target_id='898246617',
-        #                                  target_type='person',
-        #                                  message=platform_message.MessageChain([
-        #                                      platform_message.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
-        #                                  )
-        #                                  )
-        # await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
-        #                                    target_id='wxid_xd12odto989122',
-        #                                    target_type='person',
-        #                                    message=platform_message.MessageChain([
-        #                                        platform_message.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
-        #                                    )
-        #                                    )
         ctx.prevent_default()
 
     # 当收到群消息时触发
