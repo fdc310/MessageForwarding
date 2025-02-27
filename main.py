@@ -40,21 +40,23 @@ class MyPlugin(BasePlugin):
         print(ctx.event.launcher_type)
         la_type = ctx.event.launcher_type
 
-        if not msg.base64:
-            await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
-                            target_id='wxid_xd12odto989122',
-                           target_type='person',
-                           message=platform_types.MessageChain([
-                                         platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
-                                     )
-                           )
-        else:
-            await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
+
+        await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
+                        target_id='wxid_xd12odto989122',
+                       target_type='person',
+                       message=platform_types.MessageChain([
+                                     platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
+                                 )
+                       )
+        # image_data = ''
+        with open('test.txt','r') as f:
+            image_data = f.read()
+        await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
                                                target_id='wxid_xd12odto989122',
                                                target_type='person',
                                                message=platform_types.MessageChain([
                                                    platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id}"),
-                                               platform_types.Image(base64=msg)]
+                                               platform_types.Image(base64=f"data:image/png;base64,{image_data}")]
                                                )
                                                )
 
