@@ -49,23 +49,23 @@ class MyPlugin(BasePlugin):
         #                          )
         #                )
 
-
+        image = './tspho3sxi0s.jpg'
 
         await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
                                                target_id='wxid_xd12odto989122',
                                                target_type='person',
                                                message=platform_types.MessageChain([
-                                               platform_types.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')]
+                                               platform_types.Image(path='./tspho3sxi0s.jpg')]
                                                )
                                                )
 
-        await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[0],
-                                         target_id='898246617',
-                                         target_type='person',
-                                         message=platform_types.MessageChain([
-                                             platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
-                                         )
-                                         )
+        # await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[0],
+        #                                  target_id='898246617',
+        #                                  target_type='person',
+        #                                  message=platform_types.MessageChain([
+        #                                      platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
+        #                                  )
+        #                                  )
         ctx.prevent_default()
 
     # 当收到群消息时触发
