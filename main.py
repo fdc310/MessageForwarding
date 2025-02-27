@@ -55,7 +55,7 @@ class MyPlugin(BasePlugin):
                                                target_id='wxid_xd12odto989122',
                                                target_type='person',
                                                message=platform_types.MessageChain([
-                                               platform_types.Image(path='/app/plugins/MessageForwarding/tspho3sxi0s.jpg')]
+                                               platform_types.Image(path=r'\app\plugins\MessageForwarding\tspho3sxi0s.jpg')]
                                                )
                                                )
 
