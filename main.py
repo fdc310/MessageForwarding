@@ -51,7 +51,7 @@ class MyPlugin(BasePlugin):
         if msg != '[图片]':
             if msg.split('.')[-1] in ['jpg', 'png'] and msg.split("://")[0] in ["http", "https"]:
 
-                await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
+                ctx.send_message(
                                                    target_id='wxid_xd12odto989122',
                                                    target_type='person',
                                                    message=platform_message.MessageChain(
@@ -63,7 +63,7 @@ class MyPlugin(BasePlugin):
                                                 )
 
 
-            await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
+            ctx.send_message(
                             target_id='wxid_xd12odto989122',
                            target_type='person',
                            message=platform_message.MessageChain([
@@ -74,8 +74,7 @@ class MyPlugin(BasePlugin):
 
         else:
 
-            await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
-                                                   target_id='wxid_xd12odto989122',
+            ctx.send_message(target_id='wxid_xd12odto989122',
                                                    target_type='person',
                                                    message=platform_message.MessageChain(
                                                        [
@@ -84,13 +83,13 @@ class MyPlugin(BasePlugin):
                                                    )
                                                    )
 
-        # await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[0],
-        #                                  target_id='898246617',
-        #                                  target_type='person',
-        #                                  message=platform_types.MessageChain([
-        #                                      platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
-        #                                  )
-        #                                  )
+        ctx.send_message(
+                                         target_id='898246617',
+                                         target_type='person',
+                                         message=platform_message.MessageChain([
+                                             platform_message.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
+                                         )
+                                         )
         # await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
         #                                    target_id='wxid_xd12odto989122',
         #                                    target_type='person',
