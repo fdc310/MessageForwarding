@@ -1,7 +1,7 @@
 from pkg.plugin.context import register, handler, llm_func, BasePlugin, APIHost, EventContext
 from pkg.plugin.events import *  # 导入事件类
-import pkg.platform.types as platform_types
-import requests
+
+
 
 # 注册插件
 @register(name="MessageForwarding", description="Message forwarding", version="0.1", author="阿东不懂事")
@@ -37,12 +37,13 @@ class MyPlugin(BasePlugin):
         print(ctx.host.get_platform_adapters())
         print(ctx.event.launcher_type)
         la_type = ctx.event.launcher_type
-        await  ctx.send_message(
+        await  ctx.host.send_active_message(
+            adapter=ctx.host.get_platform_adapters()[1],
             target_id='wxid_xd12odto989122',
             target_type='person',
-            message=platform_types.MessageChain(
+            message=platform_message.MessageChain(
                 [
-                platform_types.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
+                platform_message.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
                         ]
                                             )
         )
@@ -97,7 +98,7 @@ class MyPlugin(BasePlugin):
         #                                        platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
         #                                    )
         #                                    )
-        ctx.prevent_default()
+        ctx.prevent_postorder()
 
     # 当收到群消息时触发
     @handler(GroupNormalMessageReceived)
