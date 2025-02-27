@@ -1,7 +1,6 @@
 from pkg.plugin.context import register, handler, llm_func, BasePlugin, APIHost, EventContext
 from pkg.plugin.events import *  # 导入事件类
 import pkg.platform.types as platform_types
-import os
 
 # 注册插件
 @register(name="MessageForwarding", description="Message forwarding", version="0.1", author="阿东不懂事")
@@ -9,8 +8,7 @@ class MyPlugin(BasePlugin):
 
     # 插件加载时触发
     def __init__(self, host: APIHost):
-        self.plugin_dir = os.path.dirname(os.path.abspath(__file__))
-
+        pass
 
     # 异步初始化
     async def initialize(self):
@@ -43,22 +41,21 @@ class MyPlugin(BasePlugin):
         la_type = ctx.event.launcher_type
 
 
-        # await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
-        #                 target_id='wxid_xd12odto989122',
-        #                target_type='person',
-        #                message=platform_types.MessageChain([
-        #                              platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
-        #                          )
-        #                )
+        await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
+                        target_id='wxid_xd12odto989122',
+                       target_type='person',
+                       message=platform_types.MessageChain([
+                                     platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
+                                 )
+                       )
 
-        image = 'tspho3sxi0s.jpg'
-        image_path = os.path.join(self.plugin_dir,image)
+
 
         await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
                                                target_id='wxid_xd12odto989122',
                                                target_type='person',
                                                message=platform_types.MessageChain([
-                                               platform_types.Image(path=image_path)]
+                                               platform_types.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')]
                                                )
                                                )
 
