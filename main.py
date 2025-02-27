@@ -1,6 +1,7 @@
 from pkg.plugin.context import register, handler, llm_func, BasePlugin, APIHost, EventContext
 from pkg.plugin.events import *  # 导入事件类
 import pkg.platform.types as platform_types
+import os
 
 # 注册插件
 @register(name="MessageForwarding", description="Message forwarding", version="0.1", author="阿东不懂事")
@@ -8,7 +9,8 @@ class MyPlugin(BasePlugin):
 
     # 插件加载时触发
     def __init__(self, host: APIHost):
-        pass
+        self.plugin_dir = os.path.dirname(os.path.abspath(__file__))
+
 
     # 异步初始化
     async def initialize(self):
@@ -49,13 +51,14 @@ class MyPlugin(BasePlugin):
         #                          )
         #                )
 
-        image = './tspho3sxi0s.jpg'
+        image = 'tspho3sxi0s.jpg'
+        image_path = os.path.join(self.plugin_dir,image)
 
         await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
                                                target_id='wxid_xd12odto989122',
                                                target_type='person',
                                                message=platform_types.MessageChain([
-                                               platform_types.Image(path=r'\app\plugins\MessageForwarding\tspho3sxi0s.jpg')]
+                                               platform_types.Image(path=image_path)]
                                                )
                                                )
 
