@@ -37,7 +37,7 @@ class MyPlugin(BasePlugin):
         print(ctx.host.get_platform_adapters())
         print(ctx.event.launcher_type)
         la_type = ctx.event.launcher_type
-        ctx.send_message(
+        await  ctx.send_message(
             target_id='wxid_xd12odto989122',
             target_type='person',
             message=platform_types.MessageChain(
@@ -90,13 +90,13 @@ class MyPlugin(BasePlugin):
         #                                      platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
         #                                  )
         #                                  )
-        await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
-                                           target_id='wxid_xd12odto989122',
-                                           target_type='person',
-                                           message=platform_types.MessageChain([
-                                               platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
-                                           )
-                                           )
+        # await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
+        #                                    target_id='wxid_xd12odto989122',
+        #                                    target_type='person',
+        #                                    message=platform_types.MessageChain([
+        #                                        platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
+        #                                    )
+        #                                    )
         ctx.prevent_default()
 
     # 当收到群消息时触发
