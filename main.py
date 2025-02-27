@@ -49,8 +49,9 @@ class MyPlugin(BasePlugin):
                                  )
                        )
         # image_data = ''
-        with open('test.txt','r') as f:
-            image_data = f.read()
+        f = open('test.txt','r')
+        image_data = f.read()
+        
         await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
                                                target_id='wxid_xd12odto989122',
                                                target_type='person',
