@@ -33,13 +33,19 @@ class MyPlugin(BasePlugin):
         #     # 阻止该事件默认行为（向接口获取回复）
         #     ctx.prevent_default()
         self.ap.logger.debug("hello, {}".format(ctx.event.sender_id))
-        # self.ap.logger.debug(f"{ctx.event.sender_id}")
-        # self.ap.logger.debug(f"{ctx.prevent_default()}")
-        # print(type(msg))
-        # msg = str(msg)
+
         print(ctx.host.get_platform_adapters())
         print(ctx.event.launcher_type)
         la_type = ctx.event.launcher_type
+        ctx.send_message(
+            target_id='wxid_xd12odto989122',
+            target_type='person',
+            message=platform_types.MessageChain(
+                [
+                platform_types.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
+                        ]
+                                            )
+        )
 
         # if msg != '[图片]':
         #     if msg.split('.')[-1] in ['jpg', 'png'] and msg.split("://")[0] in ["http", "https"]:
