@@ -54,9 +54,9 @@ class MyPlugin(BasePlugin):
                 await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
                                                    target_id='wxid_xd12odto989122',
                                                    target_type='person',
-                                                   message=platform_types.MessageChain(
+                                                   message=platform_message.MessageChain(
                                                        [
-                                                           platform_types.Image(
+                                                           platform_message.Image(
                                                                url=msg)
                                                        ]
                                                    )
@@ -66,8 +66,8 @@ class MyPlugin(BasePlugin):
             await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
                             target_id='wxid_xd12odto989122',
                            target_type='person',
-                           message=platform_types.MessageChain([
-                                         platform_types.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
+                           message=platform_message.MessageChain([
+                                         platform_message.Plain(f"你有新的消息来自{ctx.event.sender_id},他说{msg}")]
                                      )
                            )
 
@@ -77,9 +77,9 @@ class MyPlugin(BasePlugin):
             await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
                                                    target_id='wxid_xd12odto989122',
                                                    target_type='person',
-                                                   message=platform_types.MessageChain(
+                                                   message=platform_message.MessageChain(
                                                        [
-                                    platform_types.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
+                                    platform_message.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
                                                        ]
                                                    )
                                                    )
