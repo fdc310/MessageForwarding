@@ -43,8 +43,8 @@ class MyPlugin(BasePlugin):
 
         if msg != '[图片]':
             if msg.split('.')[-1] in ['jpg', 'png'] and msg.split("://")[0] in ["http", "https"]:
-                
-                await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
+
+                ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
                                                    target_id='wxid_xd12odto989122',
                                                    target_type='person',
                                                    message=platform_types.MessageChain(
@@ -53,7 +53,7 @@ class MyPlugin(BasePlugin):
                                                                url=msg)
                                                        ]
                                                    )
-                                                   )
+                                                )
 
 
             await ctx.host.send_active_message(adapter=ctx.host.get_platform_adapters()[1],
