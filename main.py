@@ -16,19 +16,22 @@ class MyPlugin(BasePlugin):
 
     # 异步初始化
     async def initialize(self):
+
         print(self.host.get_platform_adapters())
 
         async def send_message():
             print("send message start waiting")
-            await asyncio.sleep(30)
+            await asyncio.sleep(90)
 
             try:
                 await self.host.send_active_message(
                     adapter=self.host.get_platform_adapters()[0],
-                    target_type="person",
-                    target_id="wxid_xd12odto989122",
+                    target_type="group",
+                    target_id="48371594138@chatroom",
                     message=platform_types.MessageChain([
-                        platform_message.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
+                        platform_message.At(target='wxid_xd12odto989122'),
+                        platform_message.Plain(text='haha')
+                        # platform_message.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
 
                     ])
                 )
@@ -60,21 +63,48 @@ class MyPlugin(BasePlugin):
         print(ctx.host.get_platform_adapters())
         print(ctx.event.launcher_type)
         la_type = ctx.event.launcher_type
-        ctx.add_return("reply", ["hello, everyone!"])
+        await ctx.host.send_active_message(
+            adapter=self.host.get_platform_adapters()[0],
+            target_type="group",
+            target_id="48371594138@chatroom",
+            message=platform_types.MessageChain([
+                # platform_message.At(target='wxid_xd12odto989122'),
+                platform_message.Plain(text='个人')
+                # platform_message.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
+
+            ])
+
+        )
+        # ctx.add_return("reply", ["hello, everyone!"])
 
         ctx.prevent_default()
 
     # 当收到群消息时触发
+    @handler(GroupMessageReceived)
     @handler(GroupNormalMessageReceived)
     async def group_normal_message_received(self, ctx: EventContext):
-        msg = ctx.event.text_message  # 这里的 event 即为 GroupNormalMessageReceived 的对象
+        # print(ctx.event.text_message)
+        msg = [i for i in ctx.event.query.message_chain][0].text
+        print(msg, type(msg))
+        # msg = ctx.event.text_message  # 这里的 event 即为 GroupNormalMessageReceived 的对象
         if msg == "hello":  # 如果消息为hello
 
             # 输出调试信息
             self.ap.logger.debug("hello, {}".format(ctx.event.sender_id))
+            await ctx.host.send_active_message(
+                adapter=self.host.get_platform_adapters()[0],
+                target_type="group",
+                target_id="48371594138@chatroom",
+                message=platform_types.MessageChain([
+                    platform_message.At(target='wxid_xd12odto989122'),
+                    platform_message.Plain(text='群聊'),
+                    # platform_message.Image(url='https://c.53326.com/d/file/lan20210602/tspho3sxi0s.jpg')
 
-            # 回复消息 "hello, everyone!"
-            ctx.add_return("reply", ["hello, everyone!"])
+                ])
+
+            )
+
+
 
             # 阻止该事件默认行为（向接口获取回复）
             ctx.prevent_default()
