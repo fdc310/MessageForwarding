@@ -2,6 +2,7 @@ from plugins.MessageForwarding.utils.web_http import web_http, asy_http
 import asyncio
 
 
+
 class BotInquire:
 
     def __init__(self):
